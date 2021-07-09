@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+package com.filesgen.grpcHelloWorld;
+
+service FileService {
+  rpc filegetting(FileRequest) returns (FileResponse) {}
+}
+message FileRequest {
+  string id = 1;
+
+  message MESSAGE {
+    string id = 1;
+    string publicationId = 2;
+    repeated string channels = 3;
+  }
+  MESSAGE message = 2;
+
+  message SOURCE {
+    string id = 1;
+    string type = 2;
+
+    message METADATA {
+      string journeyId = 1;
+      string journeyActionId = 2;
+      string journeyBatchInstanceId = 3;
+      string journeyVersionId = 4;
+      string journeyInstanceId = 5;
+    }
+
+    METADATA metadata = 3;
+  }
+
+  SOURCE source = 3;
+
+  message SOURCES {
+    message JOURNEY {
+      string id = 1;
+    }
+    JOURNEY journey = 1;
+  }
+
+  message DISPATCHDETAILS {
+    string value = 1;
+  }
+  repeated SOURCES sources = 4;
+  string executionType = 5;
+  string status = 6;
+  repeated DISPATCHDETAILS dispatchDetails = 7;
+  repeated string terminalEventDetails = 8;
+  string createdAt = 9;
+  string modifiedAt = 10;
+  string createdBy = 11;
+  string modifiedBy = 12;
+
+  message _LINKS {
+    message SELF {
+      string href = 1;
+    }
+    SELF self = 1;
+  }
+
+  _LINKS _links = 13;
+}
+message FileResponse{
+  string reply = 1;
+}
